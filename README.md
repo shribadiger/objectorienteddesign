@@ -16,3 +16,4 @@ But following points are essential to consider in the design process
 2) After Identifying the product, How to load into CART and CHECKOUT options ( Creative Way - Different Approach than current online portal)  - One_Click_Approach
 3) Some Secure Payment Options providing - Security features need to consider the basic design
 4) Feedfack and rating feature need to consider- Invidual Product rating and feedback details. - Usability of the available features.
+
