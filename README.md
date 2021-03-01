@@ -1,5 +1,5 @@
 # Object Oriented Design #
-#### Initial Approach to Design Problem ####
+### Initial Approach to Design Problem ###
 1. Collect the complete requirement, ask for clarification if any of requirement statement is not clear. Identify the corner cases which stops to design entry points.
 2. Understand the System Expectation and Usecases which are involved in the problem statement. Make out the usecases flow and expectation of each usecase.
 3. Identify the Key Object which required to solve each usecases.
@@ -7,7 +7,7 @@
 5. Prepare the list of flows required between the Objects. Inter-communication between the Objects and make the usecases to meet the end requirement. 
 6. Finally validates about the proposed design handle the SOLID principles. 
 
-#### Some Design Solutions: Example-Online Shopping Portal ####
+### Some Design Solutions: Example-Online Shopping Portal ###
 We are using the online shoping portal to purchanges a product, but when the design comes to picture. 
 Usually will start with Login/Logout/User profile/Product View and some process related to Orders.
 
