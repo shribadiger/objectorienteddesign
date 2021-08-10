@@ -35,6 +35,64 @@ Some rules or some useful guidelines need to follow to make class interfaces.
 - Class should follow the deep copy method or avoid the copy of class object. If class having any heap allocation, it might give wrong/bad access of memory if it failed in copying. 
   ```cpp
   class BankAccount {
+    private:
+        float m_loanInterest;
     public:
-        auto set_loanInterest(
+        auto set_loanInterest(float loanInterest) {
+                m_loanInterest=loanInterest;
+        }
+        auto get_loanInterest() {
+                return m_loanInterest;
+        }
+   };
+   
+   class OfficeAccount: public BankAccount {
+       //Defined for office use
+   }
+   
+   ```
+   Now, programer need to add new loan account and attach to existed account. So will create a new loan class and trying to use existed account details. 
+   ```cpp
+   class PersonalLoan {
+        private:
+            std::shared_ptr<BankAccount> m_account;
+            float m_loanAmount;
+        public:
+            PersonalLoan(std::shared_ptr<BankAccount> acc, float loanAmount) : m_account{acc}, m_loanAmount{loanAmount} {
+                std::cout<<"\n [Log]: Creating Personal Loan Account ";
+            }
+            
+            auto& getAccount() { 
+                return m_account;
+            }
+    };
+    ```
+     Now another programmer wants to use loan accounts to set new interest rates based on type of loan. It might create a problem. Please check the below code.
+     
+     ```cpp
+     auto loan1=PersonalLoan{std::shared_ptr<OfficeAccount>(),1.2};
+     auto loan2=loan1;
+     loan2.getAccount()->set_loanInterest(1.5); // This will create same interest rates for all the loans, bcz BankAccount shared accross loan object
+     ```
+     If new programmer wants to use the PersonalLoan class, he/she can find another approach or intimate the programer by avoiding the copying object. 
+     Now, PersonalLoan class needs to be avoid the copy feature. Let make it :)
+     
+     ```cpp
+   class PersonalLoan {
+        private:
+            std::shared_ptr<BankAccount> m_account;
+            float m_loanAmount;
+            PersonalLoan(const PersonalLoan&) = delete;
+            auto operator=(const PersonalLoan& b) -> PersonalLoan& = delete;
+        public:
+            PersonalLoan(std::shared_ptr<BankAccount> acc, float loanAmount) : m_account{acc}, m_loanAmount{loanAmount} {
+                std::cout<<"\n [Log]: Creating Personal Loan Account ";
+            }
+            
+            auto& getAccount() { 
+                return m_account;
+            }
+    };
+    ```
+                
         
